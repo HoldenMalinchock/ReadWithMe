@@ -41,7 +41,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary" v-on:click="login()">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -55,6 +55,16 @@
   export default {
     props: {
       source: String,
+    },
+    data: () => ({
+        password: ""
+    }),
+    methods: {
+        login(){
+            this.console.log("TESTING 123");
+            this.console.log(this.password);
+            this.$router.push("/testing");
+        }
     }
   }
 </script>
