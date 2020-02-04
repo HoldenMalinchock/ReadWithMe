@@ -21,16 +21,7 @@ jobs:
       run: |
         pwd
         ls
-        cd ..
-        pwd
-        ls
-        cd ..
-        pwd
-        ls
-        cd ..
-        pwd
-        ls
-        cd ..
+        cd web-app
         echo running NPM build
         npm run build
         ls
