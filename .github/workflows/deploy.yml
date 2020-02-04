@@ -20,9 +20,17 @@ jobs:
     - name: build web-app
       run: |
         pwd
+        ls
         cd ..
         pwd
         ls
+        cd ..
+        pwd
+        ls
+        cd ..
+        pwd
+        ls
+        cd ..
         echo running NPM build
         npm run build
         ls
