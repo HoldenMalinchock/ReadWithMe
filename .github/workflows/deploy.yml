@@ -19,7 +19,6 @@ jobs:
 
     - name: build web-app
       run: |
-        cd ../web-app
         pwd
         echo running NPM build
         npm run build
