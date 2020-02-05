@@ -23,6 +23,7 @@ jobs:
         ls
         cd web-app
         echo running NPM build
+        npm install @vue/cli
         npm run build
         ls
 
