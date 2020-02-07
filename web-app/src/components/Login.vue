@@ -26,7 +26,7 @@
                 <v-form>
                   <v-text-field
                     label="Login"
-                    name="login"
+                    name="username"
                     prepend-icon="person"
                     type="text"
                   />
@@ -53,18 +53,26 @@
 
 <script>
   export default {
-    props: {
-      source: String,
-    },
     data: () => ({
-        password: ""
+      username: "",
+      password: ""
     }),
     methods: {
-        login(){
-            this.console.log("TESTING 123");
-            this.console.log(this.password);
-            this.$router.push("/testing");
-        }
+      login(){
+        var vm = this;
+        console.log(this.username)
+        console.log('testing123')
+        this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/login', {
+          username: vm.username,
+          password: vm.password
+        })
+        .then((response) => {
+          console.log(response);
+        }, (error) => {
+          console.log(error);
+        });
+        console.log('Request Made')
+      }
     }
   }
 </script>
