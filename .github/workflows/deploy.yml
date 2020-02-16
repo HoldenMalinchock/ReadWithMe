@@ -26,9 +26,14 @@ jobs:
         npm install @vue/cli
         pwd
         ls
+        rm -rf node_modules
+        rm package-lock.json
         npm run build
         ls
         aws s3 sync dist/ s3://readwithme.com
+        rm -rf node_modules
+        rm -rf dist/
+
 
 
     - name: Run a one-line script
