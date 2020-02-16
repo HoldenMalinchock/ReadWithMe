@@ -71,7 +71,7 @@
           console.log(response);
           // if (response[status] == 200){
           //   vm.$router.push('/home')
-          // }
+          // } 
         }, (error) => {
           console.log(error);
         });
