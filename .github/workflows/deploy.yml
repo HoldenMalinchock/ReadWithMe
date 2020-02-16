@@ -24,7 +24,7 @@ jobs:
         cd web-app
         echo running NPM build
         npm install @vue/cli
-        vue-cli-service build
+        npm run build
         ls
         aws s3 sync dist/ s3://readwithme.com
 
