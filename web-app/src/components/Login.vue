@@ -25,12 +25,14 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    v-model = "username"
                     label="Login"
                     name="username"
                     prepend-icon="person"
                     type="text"
                   />
                   <v-text-field
+                    v-model = "password"
                     id="password"
                     label="Password"
                     name="password"
@@ -60,14 +62,16 @@
     methods: {
       login(){
         var vm = this;
-        console.log(this.username)
-        console.log('testing123')
         this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/login', {
           username: vm.username,
           password: vm.password
         })
         .then((response) => {
+          // We want to push to a new page here
           console.log(response);
+          // if (response[status] == 200){
+          //   vm.$router.push('/home')
+          // }
         }, (error) => {
           console.log(error);
         });
