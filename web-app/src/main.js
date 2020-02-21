@@ -6,10 +6,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from './router';
  
+Vue.use(VueAxios, axios)
+
+Vue.use(vuetify)
+Vue.config.productionTip = false
 
 new Vue({
-  axios,
-  VueAxios,
   router,
   vuetify,
   render: h => h(App)

@@ -80,9 +80,7 @@
     }),
     methods: {
         go_to_login(){
-            console.log('YAY');
             this.$router.push("/login").catch(err => {err})
-            console.log('PLS')
         }
     }
   }
