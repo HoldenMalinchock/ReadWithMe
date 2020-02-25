@@ -80,7 +80,11 @@
     }),
     methods: {
         go_to_login(){
+
             this.$router.push("/login").catch(err => {err})
+            this.$store.commit('increment')
+            console.log(this.$store.state.count) // -> 1
+
         }
     }
   }
