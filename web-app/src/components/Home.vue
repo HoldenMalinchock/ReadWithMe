@@ -7,7 +7,7 @@
       dark
     >
       <v-spacer />
-
+      <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_login()">Scan</v-btn>
       <v-btn color="primary" v-on:click="go_to_login()">Login</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
@@ -89,3 +89,4 @@
     }
   }
 </script>
+
