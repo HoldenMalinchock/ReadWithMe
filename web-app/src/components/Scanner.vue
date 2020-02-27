@@ -76,6 +76,7 @@
 </template>
 
 <script>
+  //https://github.com/serratus/quaggaJS/issues/116
   import Quagga from 'quagga'
   export default {
     name: 'LayoutsDemosBaselineFlipped',
