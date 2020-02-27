@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login.vue'
 import Home from '@/components/Home.vue'
 import HelloWorld from '@/components/HelloWorld'
+import Scanner from '@/components/Scanner'
 
 Vue.use(Router)
 
@@ -12,6 +13,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/scan',
+      name: 'scanPage',
+      component: Scanner
     },
     {
       path: '/login',
