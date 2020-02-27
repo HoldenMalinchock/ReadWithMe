@@ -27,9 +27,8 @@ jobs:
         pwd
         ls
         rm -rf node_modules
+        npm install --save quagga
         npm install
-        npm install --save vue-axios
-        npm install --save vuex
         npm run build
         ls
         aws s3 sync dist/ s3://readwithme.com
