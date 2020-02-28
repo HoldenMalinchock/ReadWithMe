@@ -93,7 +93,12 @@
           inputStream : {
           name : "Live",
           type : "LiveStream",
-          target: this.$refs.quagga
+          target: this.$refs.quagga,
+          constraints: {
+            width: 480,
+            height: 320,
+            facingMode: "environment"
+          },
         },
         decoder : {
           readers : [{
@@ -120,6 +125,7 @@
             console.log(this.$store.state.count) // -> 1
         },
         start() { 
+            MediaDevices.getUserMedia()
             Quagga.onDetected(this.onDetected)
             Quagga.start() 
             console.log('Quagga started!')
