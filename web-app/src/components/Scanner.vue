@@ -78,6 +78,7 @@
 <script>
   //https://github.com/serratus/quaggaJS/issues/116
   import Quagga from 'quagga'
+  //import ISBN_Validator from 'isbn-validate'
   export default {
     name: 'LayoutsDemosBaselineFlipped',
     props: {
@@ -93,39 +94,25 @@
           inputStream : {
           name : "Live",
           type : "LiveStream",
-          target: this.$refs.quagga,
-          constraints: {
-            width: 480,
-            height: 320,
-            facingMode: "environment"
-          },
+          target: this.$refs.quagga
         },
-        decoder : {
-          readers : [{
-                format: "ean_reader",
-                config: {
-                    supplements: [
-                        'ean_5_reader', 'ean_2_reader'
-                    ]
-                }
-            }],
-          debug: {
-            drawBoundingBox: false,
+        decoder: {
+            readers: ["ean_reader", "upc_reader"],
+            debug: {
+              drawBoundingBox: false
+            }
           }
-        }
       },
       () => this.start())
     })
     },
     methods: {
         go_to_login(){
-
             this.$router.push("/login").catch(err => {err})
             this.$store.commit('increment')
             console.log(this.$store.state.count) // -> 1
         },
-        start() { 
-            MediaDevices.getUserMedia()
+        start() {
             Quagga.onDetected(this.onDetected)
             Quagga.start() 
             console.log('Quagga started!')
@@ -134,6 +121,13 @@
             console.log('Found a barcode')
             this.data = data
             console.log(this.data)
+            // Need to do some ISBN checking to verify it here, but for now lets make it just send a api call
+            // var vm = this;
+            console.log(typeof this.data)
+            console.log((this.data.codeResult.code).toString())
+            
+            console.log('Request Made')
+            
         },
         stop() {
             Quagga.offDetected(this.onDetected)
