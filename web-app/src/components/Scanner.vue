@@ -34,9 +34,6 @@
                   <div class="scanner_wrapper">
                     <button @click="stop">Stop</button>
                     <div ref="quagga" class="camera"/>
-                    <pre v-if="data">
-                    {{ data }}
-                    </pre>
                 </div>
                 </v-btn>
               </template>
@@ -78,7 +75,7 @@
 <script>
   //https://github.com/serratus/quaggaJS/issues/116
   import Quagga from 'quagga'
-  //import ISBN_Validator from 'isbn-validate'
+  import isbn from 'isbn-validate'
   export default {
     name: 'LayoutsDemosBaselineFlipped',
     props: {
@@ -125,7 +122,18 @@
             // var vm = this;
             console.log(typeof this.data)
             console.log((this.data.codeResult.code).toString())
-            
+            console.log((this.data.codeResult.format).toString())
+
+            console.log(isbn.Validate((this.data.codeResult.code).toString()))
+
+            if((this.data.codeResult.format).toString() == "ean_13"){
+              console.log('Right Type!')
+              if(isbn.Validate((this.data.codeResult.code).toString()) == true){
+                // Here is where we want to make a aws post request.
+                // REMEMBRE WE ONLY WANT TO DO IT ONCE AND CLOSE THE CAMERA
+                Quagga.stop()
+              }
+            }
             console.log('Request Made')
             
         },
