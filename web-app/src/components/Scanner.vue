@@ -7,7 +7,7 @@
       dark
     >
       <v-spacer />
-      <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_login()">SCAN PAGE</v-btn>
+      <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
       <v-btn color="primary" v-on:click="go_to_login()">Login</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
@@ -22,40 +22,11 @@
           justify="center"
         >
           <v-col class="text-center">
-            <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  :href="source"
-                  icon
-                  large
-                  target="_blank"
-                  v-on="on"
-                >
-                  <div class="scanner_wrapper">
-                    <button @click="stop">Stop</button>
-                    <div ref="quagga" class="camera"/>
-                </div>
-                </v-btn>
-              </template>
+            <div class="scanner_wrapper">
+              <v-btn color="primary" @click="stop">Stop</v-btn>
+              <div ref="quagga" class="camera"/>
+            </div>
 
-              <span>Source</span>
-            </v-tooltip>
-
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/WVbPgz"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Codepen</span>
-            </v-tooltip>
           </v-col>
         </v-row>
       </v-container>
@@ -67,7 +38,7 @@
     >
       <v-spacer />
 
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
@@ -83,7 +54,8 @@
     },
     data: () => ({
       drawer: null,
-      data: null
+      data: null,
+      sent: false
     }),
     mounted() {
         this.$nextTick(() => {
@@ -105,9 +77,14 @@
     },
     methods: {
         go_to_login(){
-            this.$router.push("/login").catch(err => {err})
-            this.$store.commit('increment')
-            console.log(this.$store.state.count) // -> 1
+          Quagga.stop()
+          this.$router.push("/login").catch(err => {err})
+          this.$store.commit('increment')
+          console.log(this.$store.state.count) // -> 1
+        },
+        go_to_home(){
+          Quagga.stop()
+          this.$router.push("/").catch(err => {err})
         },
         start() {
             Quagga.onDetected(this.onDetected)
@@ -118,20 +95,41 @@
             console.log('Found a barcode')
             this.data = data
             console.log(this.data)
-            // Need to do some ISBN checking to verify it here, but for now lets make it just send a api call
-            // var vm = this;
             console.log(typeof this.data)
             console.log((this.data.codeResult.code).toString())
             console.log((this.data.codeResult.format).toString())
 
             console.log(isbn.Validate((this.data.codeResult.code).toString()))
-
+            // Validate the ISBN with isbn-validate library.
+            // First using Quagga to confirm it is ean then we use library to validate.
             if((this.data.codeResult.format).toString() == "ean_13"){
               console.log('Right Type!')
               if(isbn.Validate((this.data.codeResult.code).toString()) == true){
-                // Here is where we want to make a aws post request.
-                // REMEMBRE WE ONLY WANT TO DO IT ONCE AND CLOSE THE CAMERA
-                Quagga.stop()
+                // CLOSE THE CAMERA
+                // I think I want to do a this.stop, but this causes home/login to break after clicking stop
+                if(this.sent == false){
+                  // Here is where we want to make a aws post request.
+                  // The way to not get stuck on an error here is, depening on return from aws flip sent var 
+                  // Also display some visual to show it failed in some way.  
+                  var vm = this;
+                  this.sent = true
+                  this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/getbook', {
+                    book_data: vm.data
+                  })
+                  .then((response) => {
+                    console.log(response);
+                    // We need to check for more than a 200 status! Check for success message
+                    if (response[status] == 200){
+                      console.log("Book Found")
+                    } 
+                  }, (error) => {
+                    console.log(error);
+                    this.sent = false
+                  });
+                }
+                else{
+                  console.log("Already sent")
+                }
               }
             }
             console.log('Request Made')

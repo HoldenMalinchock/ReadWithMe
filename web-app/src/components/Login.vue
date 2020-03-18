@@ -69,9 +69,16 @@
         .then((response) => {
           // We want to push to a new page here
           console.log(response);
-          // if (response[status] == 200){
-          //   vm.$router.push('/home')
-          // } 
+          // We need to check for more than a 200 status! Check for success message
+          if (response[status] == 200){
+            // Here we want to send user data to the store and store them
+            vm.$store.commit("login", this.username, this.password)
+            // Printing temperary to make sure it is working
+            console.log(vm.$store.state.username)
+            console.log(vm.$store.state.password)
+            // Take you back to the main page
+            vm.$router.push("/").catch(err => {err})
+          } 
         }, (error) => {
           console.log(error);
         });

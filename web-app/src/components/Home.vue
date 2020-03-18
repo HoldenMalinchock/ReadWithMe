@@ -7,7 +7,6 @@
       dark
     >
       <v-spacer />
-      <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_scanner()">Scan</v-btn>
       <v-btn color="primary" v-on:click="go_to_login()">Login</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
@@ -22,37 +21,7 @@
           justify="center"
         >
           <v-col class="text-center">
-            <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  :href="source"
-                  icon
-                  large
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Source</span>
-            </v-tooltip>
-
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/WVbPgz"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Codepen</span>
-            </v-tooltip>
+            <v-btn class="mx-2" color="primary" min-height=100 min-width=200  v-on:click="go_to_scanner()">Scan</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -64,7 +33,7 @@
     >
       <v-spacer />
 
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
