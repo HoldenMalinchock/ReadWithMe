@@ -92,43 +92,43 @@
             console.log('Quagga started!')
         },
         onDetected(data) {
-            console.log('Found a barcode')
             this.data = data
-            console.log(this.data)
-            console.log(typeof this.data)
             console.log((this.data.codeResult.code).toString())
-            console.log((this.data.codeResult.format).toString())
 
             console.log(isbn.Validate((this.data.codeResult.code).toString()))
             // Validate the ISBN with isbn-validate library.
             // First using Quagga to confirm it is ean then we use library to validate.
             if((this.data.codeResult.format).toString() == "ean_13"){
-              console.log('Right Type!')
               if(isbn.Validate((this.data.codeResult.code).toString()) == true){
-                // CLOSE THE CAMERA
-                // I think I want to do a this.stop, but this causes home/login to break after clicking stop
-                if(this.sent == false){
-                  // Here is where we want to make a aws post request.
-                  // The way to not get stuck on an error here is, depening on return from aws flip sent var 
-                  // Also display some visual to show it failed in some way.  
-                  var vm = this;
-                  this.sent = true
-                  this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/getbook', {
-                    book_data: vm.data
-                  })
-                  .then((response) => {
-                    console.log(response);
-                    // We need to check for more than a 200 status! Check for success message
-                    if (response[status] == 200){
-                      console.log("Book Found")
-                    } 
-                  }, (error) => {
-                    console.log(error);
-                    this.sent = false
-                  });
-                }
-                else{
-                  console.log("Already sent")
+                var found_num = (this.data.codeResult.code).toString()
+                if(found_num.charAt(0) == '9' && found_num.charAt(1) == '7', found_num.charAt(2) == '8'){
+                  // CLOSE THE CAMERA
+                  // I think I want to do a this.stop, but this causes home/login to break after clicking stop
+                  if(this.sent == false){
+                    // Here is where we want to make a aws post request.
+                    // The way to not get stuck on an error here is, depening on return from aws flip sent var 
+                    // Also display some visual to show it failed in some way.  
+                    //var vm = this;
+                    this.sent = true
+                    this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/getbook', {
+                      //book_data: vm.data
+                      book_data: found_num
+                    })
+                    .then((response) => {
+                      console.log(response);
+                      // We need to check for more than a 200 status! Check for success message
+                      if (response[status] == 200){
+                        console.log("Book Found")
+                        console.log(response)
+                      } 
+                    }, (error) => {
+                      console.log(error);
+                      this.sent = false
+                    });
+                  }
+                  else{
+                    console.log("Already sent")
+                  }
                 }
               }
             }

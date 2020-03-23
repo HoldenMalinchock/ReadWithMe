@@ -1,5 +1,14 @@
 <template>
   <v-app id="inspire">
+    <v-app-bar
+      app
+      color="cyan"
+      dark
+    >
+    <v-toolbar-title>Read With Me</v-toolbar-title>
+      <v-spacer />
+      <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
+    </v-app-bar>
     <v-content>
       <v-container
         class="fill-height"
@@ -77,6 +86,7 @@
             console.log(vm.$store.state.username)
             console.log(vm.$store.state.password)
             // Take you back to the main page
+            // NOT TAKING YOU BACK FOR SOME REASON
             vm.$router.push("/").catch(err => {err})
           } 
         }, (error) => {
