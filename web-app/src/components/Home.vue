@@ -3,7 +3,7 @@
 
     <v-app-bar
       app
-      color="cyan"
+      color="primary"
       dark
     >
       <v-spacer />

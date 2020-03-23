@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-app-bar
       app
-      color="cyan"
+      color="primary"
       dark
     >
     <v-toolbar-title>Read With Me</v-toolbar-title>
