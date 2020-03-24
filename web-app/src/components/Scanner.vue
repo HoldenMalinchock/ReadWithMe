@@ -8,7 +8,8 @@
     >
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
-      <v-btn color="primary" v-on:click="go_to_login()">Login</v-btn>
+      <v-btn v-if="$store.state.username === null" color="primary" v-on:click="go_to_login()">Login</v-btn>
+      <v-btn v-else color="primary" v-on:click="logout()">Logout</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
 
@@ -140,6 +141,10 @@
             Quagga.stop()
             this.$refs.quagga.querySelector('video').remove()
             this.$refs.quagga.querySelector('canvas').remove()
+        },
+         logout(){
+          this.$store.commit('logout')
+          this.$router.push("/scan").catch(err => {err})
         }
     }
   }
