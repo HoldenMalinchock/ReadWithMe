@@ -33,7 +33,7 @@
     </v-content>
 
     <v-footer
-      color="cyan"
+      color="primary"
       app
     >
       <v-spacer />

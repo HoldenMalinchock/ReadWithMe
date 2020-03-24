@@ -7,8 +7,8 @@
       dark
     >
       <v-spacer />
-      <v-btn color="primary" v-on:click="go_to_login()">Login</v-btn>
-      <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
+      <v-btn v-if="$store.state.username === null" color="primary" v-on:click="go_to_login()">Login</v-btn>
+      <v-btn v-else color="primary" v-on:click="logout()">Logout</v-btn>
     </v-app-bar>
 
     <v-content>
@@ -28,7 +28,7 @@
     </v-content>
 
     <v-footer
-      color="cyan"
+      color="primary"
       app
     >
       <v-spacer />
@@ -50,15 +50,13 @@
     methods: {
         go_to_login(){
             this.$router.push("/login").catch(err => {err})
-            this.$store.commit('increment')
-            console.log(this.$store.state.count) // -> 1
-
         },
         go_to_scanner(){
             this.$router.push("/scan").catch(err => {err})
-            this.$store.commit('increment')
-            console.log(this.$store.state.count) // -> 1
-
+        },
+        logout(){
+          this.$store.commit('logout')
+          this.$router.push("/").catch(err => {err})
         }
     }
   }
