@@ -70,7 +70,7 @@
     }),
     methods: {
       login(){
-        var vm = this;
+        var vm = this
         this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/login', {
           username: vm.username,
           password: vm.password
@@ -79,9 +79,11 @@
           // We want to push to a new page here
           console.log(response);
           // We need to check for more than a 200 status! Check for success message
-          if (response[status] == 200){
+          if (response.status == 200){
             // Here we want to send user data to the store and store them
-            vm.$store.commit("login", this.username, this.password)
+            var user = vm.username
+            var pass = vm.password
+            vm.$store.commit('login', {user, pass})
             // Printing temperary to make sure it is working
             console.log(vm.$store.state.username)
             console.log(vm.$store.state.password)

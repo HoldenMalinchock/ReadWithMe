@@ -13,9 +13,13 @@ export default new Vuex.Store({
       increment (state) {
         state.count++
       },
-      login (state, username, password){
-        state.username = username
-        state.password = password
+      login (state, data){
+        state.username = data.user
+        state.password = data.pass
+      },
+      logout(state){
+        state.username = null
+        state.password = null
       }
     }
   })
