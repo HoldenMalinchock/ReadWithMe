@@ -13,24 +13,19 @@
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
 
-    <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col class="text-center">
-            <div class="VideoTable">
-              <p>WIP</p>
-            </div>
-
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
+    <v-layout row>
+    <v-flex xs12 sm6 offset-sm3>
+        <v-toolbar flat>
+        </v-toolbar>
+        <v-container fluid grid-list-sm>
+          <v-layout row wrap>
+            <v-flex v-for="i in 6" :key="i" xs4>
+              <img :src="`https://randomuser.me/api/portraits/men/${i + 20}.jpg`" class="image" alt="lorem" width="100%" height="100%">
+            </v-flex>
+          </v-layout>
+        </v-container>
+    </v-flex>
+  </v-layout>
 
     <v-footer
       color="primary"
