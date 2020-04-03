@@ -111,6 +111,7 @@
                     // Also display some visual to show it failed in some way.  
                     //var vm = this;
                     this.sent = true
+                    var vm = this
                     this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/getbook', {
                       //book_data: vm.data
                       book_data: found_num
@@ -121,6 +122,7 @@
                       if (response[status] == 200){
                         console.log("Book Found")
                         console.log(response)
+                        vm.$router.push("/videos").catch(err => {err})
                       } 
                     }, (error) => {
                       console.log(error);
