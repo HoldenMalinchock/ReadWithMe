@@ -1,10 +1,18 @@
 import requests
 import json
+import hashlib
 
-response = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:9780062380661')
-print(response.content)
-print(type(response))
+isbn = '9780062380661'
+response = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:{}'.format(isbn))
+
 
 ret = json.loads(response.text)
 
-print(json.dumps(ret))
+# parse = json.dumps(ret)
+# print(type(parse))
+print(ret['items'][0]['volumeInfo']['title'])
+title = ret['items'][0]['volumeInfo']['title']
+comb = title+isbn
+
+md = hashlib.md5(comb.encode())
+print(md.hexdigest())
