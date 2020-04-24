@@ -4,7 +4,7 @@ import Login from '@/components/Login.vue'
 import Home from '@/components/Home.vue'
 import HelloWorld from '@/components/HelloWorld'
 import Scanner from '@/components/Scanner'
-import Video from '@/components/Videos'
+import Video from '@/components/Video'
 
 Vue.use(Router)
 

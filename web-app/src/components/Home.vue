@@ -23,6 +23,7 @@
         >
           <v-col class="text-center">
             <v-btn class="mx-2" color="primary" min-height=100 min-width=200  v-on:click="go_to_scanner()">Scan</v-btn>
+            <img src="https://rwm-videos.s3.amazonaws.com/69e7a3bfd950f20775821027c976f398/Bill Mines/picture/ValMeme.jpg">
           </v-col>
         </v-row>
       </v-container>

@@ -79,14 +79,13 @@
           // We want to push to a new page here
           console.log(response);
           // We need to check for more than a 200 status! Check for success message
-          if (response.status == 200){
+          if (response.data == "Login Successful"){
             // Here we want to send user data to the store and store them
             var user = vm.username
             var pass = vm.password
             vm.$store.commit('login', {user, pass})
             // Printing temperary to make sure it is working
             console.log(vm.$store.state.username)
-            console.log(vm.$store.state.password)
             // Take you back to the main page
             // NOT TAKING YOU BACK FOR SOME REASON
             vm.$router.push("/").catch(err => {err})
