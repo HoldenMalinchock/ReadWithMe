@@ -13,20 +13,39 @@
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
 
-    <v-card
-      class="mx-auto"
-      max-width="344"
-      raised
-    >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <vue-core-video-player :src="`https://rwm-videos.s3.amazonaws.com/${book}/${name}/video/${name}.mp4`" @play="playFunc()"></vue-core-video-player>
-
-      </v-list-item-content>
-
-    </v-list-item>
-  </v-card>
-
+        <v-container class="pa-4 text-center">
+    <v-row class="fill-height" align="center" justify="center">
+      <template v-for="name in names">
+        <v-col
+          :key="name"
+          cols="12"
+          md="2"
+          @click="go_to_video(name)"
+        >
+          <v-hover v-slot:default="{ hover }">
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+            >
+              <v-img
+                :src="`https://rwm-videos.s3.amazonaws.com/${book}/${name}/picture/${name}.jpg`"
+                height="225px"
+              >
+                <v-card-title class="title white--text">
+                  <v-row
+                    class="fill-height flex-column"
+                    justify="space-between"
+                  >
+                  </v-row>
+                </v-card-title>
+              </v-img>
+            </v-card>
+          </v-hover>
+          <p>{{name}}</p>
+        </v-col>
+      </template>
+    </v-row>
+  </v-container>
 
     <v-footer
       color="primary"
@@ -50,8 +69,12 @@
       data: null,
       sent: false,
       hover: false,
-      name: '',
-      book: '69e7a3bfd950f20775821027c976f398',
+      names: [
+        'Bill Mines',
+        'Holden Malinchock',
+        'John Long'
+      ],
+      book: '69e7a3bfd950f20775821027c976f398'
     }),
     methods: {
         go_to_login(){
@@ -63,17 +86,12 @@
           this.$router.push("/").catch(err => {err})
         },
         go_to_video(name){
+
           console.log("Loading Video")
           console.log(name)
-        },
-        playfunc(){
-            console.log('Play')
+          this.$router.push({name: 'videos', params: {name: name}}).catch(err => {err})
         }
-    },
-    beforeMount() {
-            console.log('Assign Name')
-            this.name = this.$route.params.name;
-        },
+    }
   }
 </script>
 

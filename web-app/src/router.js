@@ -5,6 +5,7 @@ import Home from '@/components/Home.vue'
 import HelloWorld from '@/components/HelloWorld'
 import Scanner from '@/components/Scanner'
 import Video from '@/components/Video'
+import People from '@/components/People'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/helloworld',
       name: 'helloworld',
       component: HelloWorld
+    },
+    {
+      path: '/people',
+      name: 'people',
+      component: People
     },
     {
       path: '/videos',

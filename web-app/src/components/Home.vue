@@ -8,6 +8,7 @@
     >
       <v-spacer />
       <v-btn color = "primary" v-on:click="videos()">Vid</v-btn>
+      <v-btn color = "primary" v-on:click="people()">People</v-btn>
       <v-btn v-if="$store.state.username === null" color="primary" v-on:click="go_to_login()">Login</v-btn>
       <v-btn v-else color="primary" v-on:click="logout()">Logout</v-btn>
     </v-app-bar>
@@ -23,7 +24,6 @@
         >
           <v-col class="text-center">
             <v-btn class="mx-2" color="primary" min-height=100 min-width=200  v-on:click="go_to_scanner()">Scan</v-btn>
-            <img src="https://rwm-videos.s3.amazonaws.com/69e7a3bfd950f20775821027c976f398/Bill Mines/picture/Bill Mines.jpg">
           </v-col>
         </v-row>
       </v-container>
@@ -62,6 +62,9 @@
         },
         videos(){
           this.$router.push("/videos").catch(err => {err})
+        },
+        people(){
+          this.$router.push("/people").catch(err => {err})
         }
     }
   }

@@ -7,8 +7,13 @@ import VueAxios from 'vue-axios'
 import router from './router';
 import vuex from 'vuex';
 import store from './store/store'
- 
+//import VueVideoPlayer from 'vue-video-player'
+//import VuetifyMediaPlayer from 'vuetify-media-player'
+import VueCoreVideoPlayer from 'vue-core-video-player'
+
 Vue.use(VueAxios, axios, vuex)
+
+Vue.use(VueCoreVideoPlayer)
 
 Vue.use(vuetify)
 Vue.config.productionTip = false
