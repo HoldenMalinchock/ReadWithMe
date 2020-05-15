@@ -6,6 +6,9 @@
       color="primary"
       dark
     >
+    <div class="header">
+      <h1>READ WITH ME</h1>
+    </div>
       <v-spacer />
       <v-btn color = "primary" v-on:click="videos()">Vid</v-btn>
       <v-btn color = "primary" v-on:click="people()">People</v-btn>
@@ -39,6 +42,12 @@
     </v-footer>
   </v-app>
 </template>
+
+<style  scoped>
+  .header {
+    font-family: Blippo, fantasy;
+  }
+</style>
 
 <script>
   export default {

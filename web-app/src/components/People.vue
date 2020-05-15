@@ -6,6 +6,9 @@
       color="primary"
       dark
     >
+    <div class="header">
+      <h1>READ WITH ME</h1>
+    </div>
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
       <v-btn v-if="$store.state.username === null" color="primary" v-on:click="go_to_login()">Login</v-btn>
@@ -14,6 +17,26 @@
     </v-app-bar>
 
         <v-container class="pa-4 text-center">
+          <v-card
+            class="mx-auto"
+            max-width="600"
+            raised
+            color="#FFD700"
+          >
+           <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline mb-1">{{title}}</v-list-item-title>
+              <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-avatar
+              size="100"
+
+            >
+              <v-img :src=thumbnail></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
+          </v-card>
     <v-row class="fill-height" align="center" justify="center">
       <template v-for="name in names">
         <v-col
@@ -58,6 +81,12 @@
   </v-app>
 </template>
 
+<style  scoped>
+  .header {
+    font-family: Blippo, fantasy;
+  }
+</style>
+
 <script>
   export default {
     name: 'VideosPage',
@@ -69,12 +98,11 @@
       data: null,
       sent: false,
       hover: false,
-      names: [
-        'Bill Mines',
-        'Holden Malinchock',
-        'John Long'
-      ],
-      book: '69e7a3bfd950f20775821027c976f398'
+      names: [],
+      book: '',
+      title: '',
+      thumbnail: '',
+      description: ''
     }),
     methods: {
         go_to_login(){
@@ -91,7 +119,15 @@
           console.log(name)
           this.$router.push({name: 'videos', params: {name: name}}).catch(err => {err})
         }
-    }
+    },
+    beforeMount() {
+            console.log('Assign Name')
+            this.names = this.$route.params.name_list;
+            this.book = this.$route.params.book_id;
+            this.title = this.$route.params.title;
+            this.description = this.$route.params.desc;
+            this.thumbnail = this.$route.params.thumb;
+        },
   }
 </script>
 

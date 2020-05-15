@@ -6,6 +6,9 @@
       color="primary"
       dark
     >
+    <div class="header">
+      <h1>READ WITH ME</h1>
+    </div>
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
       <v-btn v-if="$store.state.username === null" color="primary" v-on:click="go_to_login()">Login</v-btn>
@@ -38,6 +41,12 @@
     </v-footer>
   </v-app>
 </template>
+
+<style  scoped>
+  .header {
+    font-family: Blippo, fantasy;
+  }
+</style>
 
 <script>
   export default {
