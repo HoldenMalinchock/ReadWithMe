@@ -15,12 +15,12 @@
 
     <v-card
       class="mx-auto"
-      max-width="344"
+      max-width="1000"
       raised
     >
     <v-list-item three-line>
       <v-list-item-content>
-        <vue-core-video-player :src="`https://rwm-videos.s3.amazonaws.com/${book}/${name}/video/${name}.mp4`" @play="playFunc()"></vue-core-video-player>
+        <vue-core-video-player id="video" :src="`https://rwm-videos.s3.amazonaws.com/${book}/${name}/video/${name}.mp4`" @pause="pauseFunc($event)"></vue-core-video-player>
 
       </v-list-item-content>
 
@@ -52,6 +52,8 @@
       hover: false,
       name: '',
       book: '69e7a3bfd950f20775821027c976f398',
+      paused: null,
+      videoElement: null
     }),
     methods: {
         go_to_login(){
@@ -68,6 +70,19 @@
         },
         playfunc(){
             console.log('Play')
+            var v = document.getElementsByTagName("video")[0];
+            v.addEventListener("seeked", function() { v.play(); }, true);
+        },
+        pauseFunc(){
+          console.log("Trying to Pause")
+          // var v = document.querySelector("video");
+          // v.addEventListener("pause", function() { v.pause(); }, true);
+          this.videoElement = event.target;
+          this.videoElement.pause();
+
+        },
+        errorHandle(){
+          console.log("Handling error")
         }
     },
     beforeMount() {
