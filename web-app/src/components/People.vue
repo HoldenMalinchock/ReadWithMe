@@ -7,7 +7,7 @@
       dark
     >
     <div class="header">
-      <h1>READ WITH ME</h1>
+      <h1 v-on:click="go_to_home()">READ WITH ME</h1>
     </div>
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
@@ -114,14 +114,17 @@
           this.$router.push("/").catch(err => {err})
         },
         go_to_video(name){
-
-          console.log("Loading Video")
-          console.log(name)
-          this.$router.push({name: 'videos', params: {name: name}}).catch(err => {err})
+          var data = {
+            name: name,
+            desc: this.description,
+            book_id: this.book,
+            title: this.title,
+            thumb: this.thumbnail
+          }
+          this.$router.push({name: 'videos', params: data}).catch(err => {err})
         }
     },
     beforeMount() {
-            console.log('Assign Name')
             this.names = this.$route.params.name_list;
             this.book = this.$route.params.book_id;
             this.title = this.$route.params.title;

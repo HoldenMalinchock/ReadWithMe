@@ -7,7 +7,7 @@
       dark
     >
     <div class="header">
-      <h1>READ WITH ME</h1>
+      <h1 v-on:click="go_to_home()">READ WITH ME</h1>
     </div>
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
@@ -15,11 +15,27 @@
       <v-btn v-else color="primary" v-on:click="logout()">Logout</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
-
+     <v-card
+        class="mx-auto"
+        max-width="600"
+        raised
+        color="#737373"
+      >
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">{{name}}</v-list-item-title>
+            <v-list-item-subtitle>{{description}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+      <v-card-actions>
+      <v-spacer></v-spacer>
+      </v-card-actions>
     <v-card
       class="mx-auto"
       max-width="1000"
       raised
+      elevation="16"
     >
     <v-list-item three-line>
       <v-list-item-content>
@@ -51,16 +67,14 @@
 <script>
   export default {
     name: 'VideosPage',
-    props: {
-      source: String,
-    },
     data: () => ({
       drawer: null,
       data: null,
       sent: false,
       hover: false,
       name: '',
-      book: '69e7a3bfd950f20775821027c976f398',
+      book: '',
+      description: '',
       paused: null,
       videoElement: null
     }),
@@ -95,8 +109,11 @@
         }
     },
     beforeMount() {
-            console.log('Assign Name')
             this.name = this.$route.params.name;
+            this.description = this.$route.params.desc;
+            this.book = this.$route.params.book_id;
+            this.title = this.$route.params.title;
+            this.thumbnail = this.$route.params.thumb;
         },
   }
 </script>

@@ -7,7 +7,7 @@
       dark
     >
     <div class="header">
-      <h1>READ WITH ME</h1>
+      <h1 v-on:click="go_to_home()">READ WITH ME</h1>
     </div>
       <v-spacer />
       <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>

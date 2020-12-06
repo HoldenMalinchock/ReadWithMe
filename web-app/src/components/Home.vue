@@ -7,7 +7,7 @@
       dark
     >
     <div class="header">
-      <h1>READ WITH ME</h1>
+      <h1 elevation="10" v-on:click="go_to_home()">READ WITH ME</h1>
     </div>
       <v-spacer />
       <v-btn color = "primary" v-on:click="videos()">Vid</v-btn>
@@ -59,6 +59,9 @@
       drawer: null,
     }),
     methods: {
+        go_to_home(){
+          this.$router.push("/").catch(err => {err})
+        },
         go_to_login(){
             this.$router.push("/login").catch(err => {err})
         },
