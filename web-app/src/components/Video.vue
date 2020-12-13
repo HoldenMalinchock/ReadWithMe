@@ -73,6 +73,7 @@
       sent: false,
       hover: false,
       name: '',
+      names: [],
       book: '',
       description: '',
       paused: null,
@@ -97,9 +98,6 @@
             v.addEventListener("seeked", function() { v.play(); }, true);
         },
         pauseFunc(){
-          console.log("Trying to Pause")
-          // var v = document.querySelector("video");
-          // v.addEventListener("pause", function() { v.pause(); }, true);
           this.videoElement = event.target;
           this.videoElement.pause();
 
@@ -109,12 +107,13 @@
         }
     },
     beforeMount() {
-            this.name = this.$route.params.name;
-            this.description = this.$route.params.desc;
-            this.book = this.$route.params.book_id;
-            this.title = this.$route.params.title;
-            this.thumbnail = this.$route.params.thumb;
-        },
+      this.names = JSON.parse(localStorage.getItem("name_list"));
+      this.book = localStorage.book
+      this.title  = localStorage.title
+      this.description = localStorage.description
+      this.thumbnail = localStorage.thumbnail
+      this.name = localStorage.name
+    },
   }
 </script>
 

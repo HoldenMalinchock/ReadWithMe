@@ -59,25 +59,27 @@
       drawer: null,
     }),
     methods: {
-        go_to_home(){
-          this.$router.push("/").catch(err => {err})
-        },
-        go_to_login(){
-            this.$router.push("/login").catch(err => {err})
-        },
-        go_to_scanner(){
-            this.$router.push("/scan").catch(err => {err})
-        },
-        logout(){
-          this.$store.commit('logout')
-          this.$router.push("/").catch(err => {err})
-        },
-        videos(){
-          this.$router.push("/videos").catch(err => {err})
-        },
-        people(){
-          this.$router.push("/people").catch(err => {err})
-        }
+      go_to_home(){
+        this.$router.push("/").catch(err => {err})
+      },
+      go_to_login(){
+          this.$router.push("/login").catch(err => {err})
+      },
+      go_to_scanner(){
+          this.$router.push("/scan").catch(err => {err})
+      },
+      logout(){
+        this.$store.commit('logout')
+        this.$router.push("/").catch(err => {err})
+      },
+      videos(){
+        this.$router.push("/videos").catch(err => {err})
+      },
+      people(){
+        this.$router.push("/people").catch(err => {err})
+      }
+    },
+    mounted(){
     }
   }
 </script>

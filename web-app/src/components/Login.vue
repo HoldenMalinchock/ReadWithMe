@@ -70,6 +70,7 @@
     }),
     methods: {
       login(){
+        localStorage.test = '123'
         var vm = this
         this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/login', {
           username: vm.username,

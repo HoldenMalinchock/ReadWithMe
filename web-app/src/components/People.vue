@@ -114,23 +114,17 @@
           this.$router.push("/").catch(err => {err})
         },
         go_to_video(name){
-          var data = {
-            name: name,
-            desc: this.description,
-            book_id: this.book,
-            title: this.title,
-            thumb: this.thumbnail
-          }
-          this.$router.push({name: 'videos', params: data}).catch(err => {err})
+          localStorage.name = name
+          this.$router.push({name: 'videos'}).catch(err => {err})
         }
     },
     beforeMount() {
-            this.names = this.$route.params.name_list;
-            this.book = this.$route.params.book_id;
-            this.title = this.$route.params.title;
-            this.description = this.$route.params.desc;
-            this.thumbnail = this.$route.params.thumb;
-        },
+      this.names = JSON.parse(localStorage.getItem("name_list"));
+      this.book = localStorage.book
+      this.title  = localStorage.title
+      this.description = localStorage.description
+      this.thumbnail = localStorage.thumbnail
+    },
   }
 </script>
 

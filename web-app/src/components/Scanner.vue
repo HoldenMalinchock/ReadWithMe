@@ -34,6 +34,7 @@
             <div class="scanner_wrapper">
               <v-card-title  class="justify-center">Scan A Book</v-card-title>
               <v-btn class="my-2" color="primary" @click="stop">Stop</v-btn>
+              <v-btn class="my-2" color="primary" @click="cheat()">Bypass</v-btn>
               <div ref="quagga" class="camera"/>
             </div>
 
@@ -142,6 +143,7 @@
                       // We need to check for more than a 200 status! Check for success message
                       if (response.status == 200){
                         console.log("Book Found")
+                        self.store_book_data(response)
                         self.book = response.data.book_id
                         self.names = response.data.name_list
                         self.thumbnail = response.data.items[0].volumeInfo.imageLinks.thumbnail
@@ -158,6 +160,39 @@
               }
             }
             
+        },
+        cheat() {
+          console.log('Bypassing to use a default book')
+          let self = this;
+          this.axios.post('https://0vkhy4t6qe.execute-api.us-east-1.amazonaws.com/DEV/getbook', {
+            //book_data: vm.data
+            book_data: '9780062380661'
+          })
+          .then((response) => {
+            console.log(response)
+            // We need to check for more than a 200 status! Check for success message
+            if (response.status == 200){
+              console.log("Book Found")
+              self.store_book_data(response)
+              self.book = response.data.book_id
+              self.names = response.data.name_list
+              self.thumbnail = response.data.items[0].volumeInfo.imageLinks.thumbnail
+              self.title = response.data.items[0].volumeInfo.title
+              self.description = response.data.items[0].volumeInfo.description
+              self.$router.push({name: 'people'}).catch(err => {err})
+            } 
+          }, (error) => {
+            console.log(error);
+            this.sent = false
+          });
+        },
+        store_book_data(response) {
+          localStorage.book = response.data.book_id
+          //localStorage.name_list = response.data.name_list
+          localStorage.setItem("name_list", JSON.stringify(response.data.name_list));
+          localStorage.thumbnail = response.data.items[0].volumeInfo.imageLinks.thumbnail
+          localStorage.title = response.data.items[0].volumeInfo.title
+          localStorage.description = response.data.items[0].volumeInfo.description
         },
         stop() {
             Quagga.offDetected(this.onDetected)
