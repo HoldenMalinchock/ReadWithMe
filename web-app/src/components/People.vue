@@ -107,8 +107,6 @@
     methods: {
         go_to_login(){
           this.$router.push("/login").catch(err => {err})
-          this.$store.commit('increment')
-          console.log(this.$store.state.count) // -> 1
         },
         go_to_home(){
           this.$router.push("/").catch(err => {err})
