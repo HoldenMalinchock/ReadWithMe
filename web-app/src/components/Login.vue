@@ -7,6 +7,7 @@
     >
     <v-toolbar-title>Read With Me</v-toolbar-title>
       <v-spacer />
+      <v-btn class="mx-2" color="primary" min-width=0  v-on:click="go_to_home()">Home</v-btn>
       <!-- This is an interesting feature I may want to use later <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
     </v-app-bar>
     <v-content>
@@ -95,6 +96,9 @@
           console.log(error);
         });
         console.log('Request Made')
+      },
+      go_to_home(){
+        this.$router.push("/").catch(err => {err})
       }
     }
   }
